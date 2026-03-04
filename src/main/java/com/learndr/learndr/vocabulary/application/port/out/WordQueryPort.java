@@ -1,8 +1,8 @@
 package com.learndr.learndr.vocabulary.application.port.out;
 
-import com.learndr.learndr.vocabulary.application.dto.query.GetWordsPageQuery;
-import com.learndr.learndr.vocabulary.application.dto.result.WordsPageResponse;
+import com.learndr.learndr.vocabulary.application.model.query.PageRequest;
+import com.learndr.learndr.vocabulary.application.model.query.WordsPage;
 
 public interface WordQueryPort {
-    WordsPageResponse getWordsPage(GetWordsPageQuery query);
+    WordsPage getWordsPage(PageRequest pageRequest);
 }

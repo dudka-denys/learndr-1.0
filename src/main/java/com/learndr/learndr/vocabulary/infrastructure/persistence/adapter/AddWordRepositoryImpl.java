@@ -38,6 +38,4 @@ public class AddWordRepositoryImpl implements WordRepository {
     WordJpaEntity saved = jpaWordRepository.save(entity);
     return new Word(new WordId(saved.getId()), saved.getWord(), saved.getMeaning(), saved.getContext(), saved.getLearnProgressPercentage(), saved.isLearned(), saved.getCreatedAt());
   }
-
-  
 }

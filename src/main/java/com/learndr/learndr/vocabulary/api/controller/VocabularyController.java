@@ -16,8 +16,6 @@ import com.learndr.learndr.vocabulary.application.dto.command.*;
 import com.learndr.learndr.vocabulary.application.dto.result.*;
 import com.learndr.learndr.vocabulary.application.dto.query.*;
 import com.learndr.learndr.vocabulary.application.port.in.*;
-import com.learndr.learndr.vocabulary.application.service.GetWordsPageService;
-// import com.learndr.learndr.vocabulary.application.port.out.*;
 import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
 import com.learndr.learndr.vocabulary.api.mapper.*;;
@@ -25,9 +23,11 @@ import com.learndr.learndr.vocabulary.api.mapper.*;;
 @Controller
 public class VocabularyController {
   private final AddWordUseCase AddWordUseCase;
+  private final GetWordsPageUseCase GetWordsPageUseCase;
 
-  public VocabularyController(AddWordUseCase AddWordUseCase) {
+  public VocabularyController(AddWordUseCase AddWordUseCase, GetWordsPageUseCase GetWordsPageUseCase) {
     this.AddWordUseCase = AddWordUseCase;
+    this.GetWordsPageUseCase = GetWordsPageUseCase;
   }
 
   @GetMapping("/vocabulary")
@@ -41,7 +41,7 @@ public class VocabularyController {
     @RequestParam int size,
     @RequestParam String sort) {
       GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort);
-      WordsPageResponse response = GetWordsPageService.execute(query);
+      WordsPageResponse response = GetWordsPageUseCase.execute(query);
   }
 
 
@@ -60,3 +60,5 @@ public class VocabularyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 }
+
+
