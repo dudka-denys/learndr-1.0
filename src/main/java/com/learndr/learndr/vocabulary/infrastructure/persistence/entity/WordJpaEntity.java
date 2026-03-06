@@ -86,7 +86,7 @@ public class WordJpaEntity {
     return id_word;
   }
 
-  public boolean isLearned() {
+  public boolean getIsLearned() {
     return Boolean.TRUE.equals(is_learned);
   }
 

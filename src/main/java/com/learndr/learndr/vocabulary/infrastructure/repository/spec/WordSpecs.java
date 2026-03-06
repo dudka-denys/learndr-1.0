@@ -1,6 +1,5 @@
 package com.learndr.learndr.vocabulary.infrastructure.repository.spec;
 
-import com.learndr.learndr.vocabulary.domain.entity.Word;
 import com.learndr.learndr.vocabulary.infrastructure.persistence.entity.WordJpaEntity;
 import  org.springframework.data.jpa.domain.Specification;
 public final class WordSpecs {
@@ -15,8 +14,8 @@ public final class WordSpecs {
     if (q == null || q.isBlank()) return null;
     String like = "%" + q.trim().toLowerCase() +"%";
     return (root, query, cb) -> cb.or(
-      cb.like(cb.lower(root.get("word")), q),
-      cb.like(cb.lower(root.get("meaning")), q)
+      cb.like(cb.lower(root.get("word")), like),
+      cb.like(cb.lower(root.get("meaning")), like)
     );  
   }
 }

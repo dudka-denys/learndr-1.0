@@ -63,7 +63,7 @@
       const params = new URLSearchParams({
         page: page,
         size: size,
-        sort: "createdAt, desc"
+        sort: "created_at, desc"
       });
 
       const res = await fetch(`api/words?${params.toString()}`);
