@@ -279,7 +279,7 @@ body {
 
 .word {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) 72px;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) auto;
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
@@ -303,7 +303,7 @@ body {
 }
 
 .word:not(.has-context) {
-  grid-template-columns: minmax(220px, 1fr) 72px;
+  grid-template-columns: minmax(220px, 1fr) auto;
 }
 
 .word-data {
@@ -341,7 +341,15 @@ body {
   word-break: break-word;
 }
 
-.word-status {
+.word-actions {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.word-status,
+.word-delete-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,7 +360,28 @@ body {
   border: 1px solid #e2e8f0;
 }
 
+.word-delete-button {
+  padding: 0;
+  cursor: pointer;
+  background: #fff1f2;
+  border-color: #fecdd3;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.word-delete-button:hover {
+  transform: translateY(-1px);
+  border-color: #fb7185;
+  box-shadow: 0 10px 18px rgba(244, 63, 94, 0.18);
+}
+
 .word-status-icon {
+  width: 45px;
+  height: 45px;
+  display: block;
+  object-fit: contain;
+}
+
+.word-delete-icon {
   width: 45px;
   height: 45px;
   display: block;
@@ -362,7 +391,7 @@ body {
 @media (max-width: 900px) {
   .word,
   .word:not(.has-context) {
-    grid-template-columns: minmax(0, 1fr) 72px;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .word-context {
@@ -386,7 +415,13 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .word-status {
+  .word-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .word-status,
+  .word-delete-button {
     width: 48px;
     height: 48px;
   }

@@ -14,21 +14,27 @@
   <div class="content">
     <div class="vocab-header">
       <h1>Vocabulary</h1>
-      <button class="btn-add-word" onclick="openModal()">+ Add New Word</button>
+      <button id="open-add-word-modal" type="button" class="btn-add-word">+ Add New Word</button>
     </div>
-    <div id="vocabList" class="vocab-list">
+    <div
+      id="vocabList"
+      class="vocab-list"
+      th:data-words-api-url="@{/api/words}"
+      th:data-learned-icon-url="@{/img/learned.svg}"
+      th:data-not-learned-icon-url="@{/img/not_learned.svg}"
+      th:data-delete-icon-url="@{/img/delete.svg}">
       <div id="page-info"></div>
       <div id="words-container"></div>
       <div id="pagination">
-        <button id="prev-page">Previous</button>
-        <button id="next-page">Next</button>
+        <button id="prev-page" type="button">Previous</button>
+        <button id="next-page" type="button">Next</button>
       </div>
     </div>
 
     <!-- Modal Popup -->
     <div id="addWordModal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span id="close-add-word-modal" class="close">&times;</span>
         <h2>Add New Word</h2>
         <form id="addWordForm" method="post">
           <div class="form-group">
@@ -50,160 +56,7 @@
       </div>
     </div>
   </div>
-
-  <script th:inline="javascript">
-    let page = 0;
-    const learnedIconUrl = "/img/learned.svg";
-    const notLearnedIconUrl = "/img/not_learned.svg";
-
-    async function init() {
-      const data = await loadWordsPage();
-      render(data);
-    }
-    window.onload = init;
-
-    // Initial fetch of user's words
-    async function loadWordsPage(page = 0, size = 30) {
-      const params = new URLSearchParams({
-        page: page,
-        size: size,
-        sort: "created_at, desc"
-      });
-
-      const res = await fetch(`api/words?${params.toString()}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    }
-    
-    // Rendering all user's words on page load
-    function createWordCard(word) {
-      const word_div = document.createElement("div");
-      word_div.className = `word ${word.isLearned ? "learned" : "not-learned"}`;
-
-      const word_data = document.createElement("div");
-      word_data.className = "word-data";
-
-      const word_value = document.createElement("p");
-      word_value.className = "word_value";
-      word_value.textContent = word.word;
-
-      const word_meaning = document.createElement("p");
-      word_meaning.className = "word_meaning";
-      word_meaning.textContent = word.meaning;
-
-      word_data.append(word_value, word_meaning);
-      word_div.appendChild(word_data);
-
-      if (word.context && word.context.trim()) {
-        word_div.classList.add("has-context");
-
-        const context_div = document.createElement("div");
-        context_div.className = "word-context";
-
-        const context_value = document.createElement("p");
-        context_value.className = "word-context-value";
-        context_value.textContent = word.context;
-
-        context_div.appendChild(context_value);
-        word_div.appendChild(context_div);
-      }
-
-      const status_div = document.createElement("div");
-      status_div.className = "word-status";
-
-      const status_icon = document.createElement("img");
-      status_icon.className = "word-status-icon";
-      status_icon.src = word.isLearned ? learnedIconUrl : notLearnedIconUrl;
-      status_icon.alt = word.isLearned ? "Learned word" : "Word in progress";
-
-      status_div.appendChild(status_icon);
-      word_div.appendChild(status_div);
-
-      return word_div;
-    }
-
-    function render(page) {
-      const page_info = document.getElementById("page-info");
-      const words_container = document.getElementById("words-container");
-      const prev_button = document.getElementById("prev-page");
-      const next_button = document.getElementById("next-page");
-
-      words_container.innerHTML = "";
-
-      if (page.wordsDTO.length === 0) {
-        page_info.textContent = "No words yet";
-      } else {
-        page_info.textContent = `Page ${page.page + 1} of ${page.totalPages}`;
-      }
-
-      page.wordsDTO.forEach(word => {
-        words_container.appendChild(createWordCard(word));
-      });
-
-      prev_button.disabled = !page.hasPrevious;
-      next_button.disabled = !page.hasNext;
-    }
-
-    async function loadPage(page) {
-      page += 1;
-      const data = await loadWordsPage(page);
-      render(data);
-    }
-
-    // Open modal to Add word 
-    function openModal() {
-      document.getElementById("addWordModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("addWordModal").style.display = "none";
-    }
-    // Close modal when clicking outside of it
-    window.onclick = function (event) {
-      const modal = document.getElementById("addWordModal");
-      if (event.target == modal) {
-        closeModal();
-      }
-    }
-
-    // send form with JSON 
-    document.getElementById("addWordForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const payload = {
-        word: document.getElementById("word").value,
-        meaning: document.getElementById("meaning").value,
-        context: document.getElementById("context").value,
-      }
-
-      const response = await fetch("api/words", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        e.target.reset();
-        showCreatedWord(await response.json());
-        closeModal();
-      }
-      else {
-        const error = await response.text();
-        console.error(error);
-      }
-    })
-
-    // render new added word
-    function showCreatedWord(created_word) {
-      const list = document.getElementById("words-container");
-      const page_info = document.getElementById("page-info");
-
-      list.prepend(createWordCard(created_word));
-
-      if (page_info.textContent === "No words yet") {
-        page_info.textContent = "Page 1 of 1";
-      }
-    }
-  </script>
+  <script th:src="@{/js/vocabulary/vocab-list.js}" defer></script>
 </body>
 
 </html>

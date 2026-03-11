@@ -1,32 +1,44 @@
 package com.learndr.learndr.vocabulary.api.controller;
 
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import com.learndr.learndr.vocabulary.application.dto.command.*;
 import com.learndr.learndr.vocabulary.application.dto.query.*;
 import com.learndr.learndr.vocabulary.application.port.in.*;
+import com.learndr.learndr.vocabulary.domain.entity.WordId;
 import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
 import com.learndr.learndr.vocabulary.api.mapper.*;;
 
 @Controller
+@Validated
 public class VocabularyController {
   private final AddWordUseCase AddWordUseCase;
   private final GetWordsPageUseCase getWordsPageUseCase;
+  private final DeleteWordUseCase deleteWordUseCase;
 
-  public VocabularyController(AddWordUseCase AddWordUseCase, GetWordsPageUseCase GetWordsPageUseCase) {
+  public VocabularyController(
+      AddWordUseCase AddWordUseCase,
+      GetWordsPageUseCase GetWordsPageUseCase,
+      DeleteWordUseCase DeleteWordUseCase) {
     this.AddWordUseCase = AddWordUseCase;
     this.getWordsPageUseCase = GetWordsPageUseCase;
+    this.deleteWordUseCase = DeleteWordUseCase;
   }
 
   @GetMapping("/vocabulary")
@@ -42,7 +54,6 @@ public class VocabularyController {
     GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort);
     WordsPageDTOResponse response = WordsPageDTOMapper.toDTO(getWordsPageUseCase.execute(query));
     return ResponseEntity.ok(response);
-
   }
 
   @PostMapping("/api/words")
@@ -56,4 +67,12 @@ public class VocabularyController {
 
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
+
+  // return 204
+  @DeleteMapping("/api/words/{id}")
+  public ResponseEntity deleteWord(@PathVariable @Positive long id) {
+    // deleteWordUseCase.execute(WordId(id));
+    return ResponseEntity.noContent().build();
+  }
+
 }

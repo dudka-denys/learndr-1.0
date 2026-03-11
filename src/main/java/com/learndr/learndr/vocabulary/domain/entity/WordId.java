@@ -1,14 +1,15 @@
 package com.learndr.learndr.vocabulary.domain.entity;
 
 public final class WordId {
-  private final Long value;
+  private final long value;
 
-  public WordId(Long value) {
-    this.value = java.util.Objects.requireNonNull(value, "WordId value cannot be null");
+  public WordId(long value) {
     if (value <= 0) {
       throw new IllegalArgumentException("WordId value must be positive");
     }
+    this.value = value;
   }
+
 
   public Long value() {
     return value;
@@ -19,12 +20,12 @@ public final class WordId {
     if (this == o) return true;
     if (!(o instanceof WordId)) return false;
     WordId other = (WordId) o;
-    return value.equals(other.value);
+    return value == other.value;
   }
 
   @Override
   public int hashCode() {
-    return value.hashCode();
+    return Long.hashCode(value);
   }
 
   @Override

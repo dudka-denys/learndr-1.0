@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import com.learndr.learndr.vocabulary.application.model.query.WordPageRequest;
