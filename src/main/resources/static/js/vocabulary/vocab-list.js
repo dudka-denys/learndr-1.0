@@ -110,6 +110,19 @@ function bindEvents(elements, config, state) {
       console.error("Failed to create word", error);
     }
   });
+
+  elements.wordsContainer.addEventListener("click", async (event) => {
+    const delete_button = event.target.closest(".word-delete-button");
+    if (!delete_button) return;
+    const { wordId } = delete_button.dataset;
+
+    try {
+      await deleteWord(config.wordsApiUrl, wordId);
+      await refreshWords(elements, config, state)
+    } catch (error) {
+      console.error("Failed to delete word", error);
+    }
+  })
 }
 
 async function refreshWords(elements, config, state) {
@@ -241,4 +254,10 @@ function openModal(modal) {
 
 function closeModal(modal) {
   modal.style.display = "none";
+}
+
+async function deleteWord(wordsApiUrl, id) {
+  await fetch(`${wordsApiUrl}/${id}`, {
+    method: "DELETE"
+  })
 }

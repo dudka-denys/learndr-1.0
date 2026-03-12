@@ -1,6 +1,5 @@
 package com.learndr.learndr.vocabulary.api.controller;
 
-import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import com.learndr.learndr.vocabulary.application.dto.command.*;
 import com.learndr.learndr.vocabulary.application.dto.query.*;
 import com.learndr.learndr.vocabulary.application.port.in.*;
-import com.learndr.learndr.vocabulary.domain.entity.WordId;
 import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
 import com.learndr.learndr.vocabulary.api.mapper.*;;
@@ -71,7 +68,7 @@ public class VocabularyController {
   // return 204
   @DeleteMapping("/api/words/{id}")
   public ResponseEntity deleteWord(@PathVariable @Positive long id) {
-    // deleteWordUseCase.execute(WordId(id));
+    deleteWordUseCase.execute(new DeleteWordCommand(id));
     return ResponseEntity.noContent().build();
   }
 
