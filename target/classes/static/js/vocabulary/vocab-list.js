@@ -2,12 +2,14 @@
 
 const DEFAULT_PAGE_SIZE = 30;
 const DEFAULT_SORT = "created_at,desc";
+let controller;
 
 document.addEventListener("DOMContentLoaded", () => {
   const elements = getPageElements();
   const config = getPageConfig(elements.vocabList);
   const state = {
     currentPage: 0,
+    searchWordString: "",
   };
 
   bindEvents(elements, config, state);
@@ -28,6 +30,7 @@ function getPageElements() {
     wordInput: getRequiredElement("word"),
     meaningInput: getRequiredElement("meaning"),
     contextInput: getRequiredElement("context"),
+    searchWordInput: getRequiredElement("search-word"),
   };
 }
 
@@ -123,11 +126,15 @@ function bindEvents(elements, config, state) {
       console.error("Failed to delete word", error);
     }
   })
+
+  elements.searchWordInput.addEventListener(
+    "input", (event) => debouncedSearch(event.target.value, elements, config, state)
+  );
 }
 
 async function refreshWords(elements, config, state) {
   try {
-    const pageData = await loadWordsPage(config.wordsApiUrl, state.currentPage, DEFAULT_PAGE_SIZE);
+    const pageData = await loadWordsPage(config.wordsApiUrl, state.currentPage, DEFAULT_PAGE_SIZE, state.searchWordString);
     state.currentPage = pageData.page;
     renderPage(elements, pageData, config);
   } catch (error) {
@@ -135,14 +142,23 @@ async function refreshWords(elements, config, state) {
   }
 }
 
-async function loadWordsPage(wordsApiUrl, page = 0, size = DEFAULT_PAGE_SIZE) {
+async function loadWordsPage(wordsApiUrl, page = 0, size = DEFAULT_PAGE_SIZE, searchWordString) {
   const params = new URLSearchParams({
     page: String(page),
     size: String(size),
     sort: DEFAULT_SORT,
+    searchSubStr: searchWordString,
   });
 
-  const response = await fetch(`${wordsApiUrl}?${params.toString()}`);
+  if(controller)
+  {
+    controller.abort();
+  }
+  controller = new AbortController();
+
+  const response = await fetch(`${wordsApiUrl}?${params.toString()}`, {
+    signal: controller.signal
+  });
 
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}`);
@@ -260,4 +276,23 @@ async function deleteWord(wordsApiUrl, id) {
   await fetch(`${wordsApiUrl}/${id}`, {
     method: "DELETE"
   })
+}
+
+const debouncedSearch = debounce(async (query, elements, config, state) => {
+  state.searchWordString = query;
+  state.page = 0;
+
+  refreshWords(elements, config, state);
+}, 300)
+
+function debounce(fn, delay) {
+  let timer;
+
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+
+    }, delay);
+  }
 }

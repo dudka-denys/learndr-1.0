@@ -6,6 +6,7 @@ import com.learndr.learndr.vocabulary.application.dto.query.GetWordsPageQuery;
 import com.learndr.learndr.vocabulary.application.dto.result.WordsPageResponse;
 import com.learndr.learndr.vocabulary.application.mapper.WordsPageOutputMapper;
 import com.learndr.learndr.vocabulary.application.model.query.WordPageRequest;
+import com.learndr.learndr.vocabulary.application.model.query.WordSearchCriteria;
 import com.learndr.learndr.vocabulary.application.port.in.GetWordsPageUseCase;
 import com.learndr.learndr.vocabulary.application.port.out.WordQueryPort;
 
@@ -23,6 +24,7 @@ public class GetWordsPageService implements GetWordsPageUseCase {
         getWordsPageQuery.page(),
         getWordsPageQuery.size(),
         getWordsPageQuery.sort());
-    return WordsPageOutputMapper.toWordsPageResponse(wordQueryPort.getWordsPage(pageRequest));
+    WordSearchCriteria criteria = new WordSearchCriteria(getWordsPageQuery.searchSubStr());
+    return WordsPageOutputMapper.toWordsPageResponse(wordQueryPort.getWordsPage(pageRequest, criteria));
   }
 }

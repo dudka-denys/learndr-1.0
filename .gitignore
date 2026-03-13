@@ -1,3 +1,4 @@
 docker-compose.yml
 .history/
 decisions/*
+AGENTS.md

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.PageRequest;
 
 import com.learndr.learndr.vocabulary.application.model.query.WordPageRequest;
+import com.learndr.learndr.vocabulary.application.model.query.WordSearchCriteria;
 import com.learndr.learndr.vocabulary.application.model.query.WordsPage;
 import com.learndr.learndr.vocabulary.application.port.out.WordQueryPort;
 import com.learndr.learndr.vocabulary.infrastructure.repository.SpringDataWordRepository;
@@ -31,7 +32,7 @@ public class WordQueryRepositoryJpaAdapter implements WordQueryPort {
   }
 
   @Override
-  public WordsPage getWordsPage(WordPageRequest wordPageRequest) {
+  public WordsPage getWordsPage(WordPageRequest wordPageRequest, WordSearchCriteria criteria) {
     Pageable pageable = PageRequest.of(
         wordPageRequest.page(),
         wordPageRequest.size(),

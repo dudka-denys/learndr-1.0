@@ -14,14 +14,11 @@
   <div class="content">
     <div class="vocab-header">
       <h1>Vocabulary</h1>
+      <input type="text" placeholder="your word..." id="search-word">
       <button id="open-add-word-modal" type="button" class="btn-add-word">+ Add New Word</button>
     </div>
-    <div
-      id="vocabList"
-      class="vocab-list"
-      th:data-words-api-url="@{/api/words}"
-      th:data-learned-icon-url="@{/img/learned.svg}"
-      th:data-not-learned-icon-url="@{/img/not_learned.svg}"
+    <div id="vocabList" class="vocab-list" th:data-words-api-url="@{/api/words}"
+      th:data-learned-icon-url="@{/img/learned.svg}" th:data-not-learned-icon-url="@{/img/not_learned.svg}"
       th:data-delete-icon-url="@{/img/delete.svg}">
       <div id="page-info"></div>
       <div id="words-container"></div>

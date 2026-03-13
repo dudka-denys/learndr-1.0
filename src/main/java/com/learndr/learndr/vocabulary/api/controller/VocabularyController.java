@@ -1,6 +1,5 @@
 package com.learndr.learndr.vocabulary.api.controller;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -47,8 +46,9 @@ public class VocabularyController {
   public ResponseEntity<WordsPageDTOResponse> getWords(
       @RequestParam int page,
       @RequestParam int size,
-      @RequestParam String sort) {
-    GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort);
+      @RequestParam String sort,
+      @RequestParam String searchSubStr) {
+    GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr);
     WordsPageDTOResponse response = WordsPageDTOMapper.toDTO(getWordsPageUseCase.execute(query));
     return ResponseEntity.ok(response);
   }
