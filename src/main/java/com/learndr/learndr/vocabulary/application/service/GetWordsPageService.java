@@ -24,7 +24,7 @@ public class GetWordsPageService implements GetWordsPageUseCase {
         getWordsPageQuery.page(),
         getWordsPageQuery.size(),
         getWordsPageQuery.sort());
-    WordSearchCriteria criteria = new WordSearchCriteria(getWordsPageQuery.searchSubStr());
+    WordSearchCriteria criteria = new WordSearchCriteria(getWordsPageQuery.searchSubStr(), null);
     return WordsPageOutputMapper.toWordsPageResponse(wordQueryPort.getWordsPage(pageRequest, criteria));
   }
 }

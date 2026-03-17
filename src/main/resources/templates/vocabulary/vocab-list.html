@@ -13,8 +13,16 @@
 
   <div class="content">
     <div class="vocab-header">
-      <h1>Vocabulary</h1>
-      <input type="text" placeholder="your word..." id="search-word">
+      <div class="vocab-header-main">
+        <h1>Vocabulary</h1>
+        <label class="vocab-search-label" for="search-word">Find a word</label>
+        <input
+          type="text"
+          placeholder="Search by word or meaning..."
+          id="search-word"
+          class="vocab-search-input"
+          autocomplete="off">
+      </div>
       <button id="open-add-word-modal" type="button" class="btn-add-word">+ Add New Word</button>
     </div>
     <div id="vocabList" class="vocab-list" th:data-words-api-url="@{/api/words}"

@@ -134,7 +134,11 @@ function bindEvents(elements, config, state) {
 
 async function refreshWords(elements, config, state) {
   try {
-    const pageData = await loadWordsPage(config.wordsApiUrl, state.currentPage, DEFAULT_PAGE_SIZE, state.searchWordString);
+    const pageData = await loadWordsPage(
+      config.wordsApiUrl,
+      state.currentPage,
+      DEFAULT_PAGE_SIZE,
+      state.searchWordString);
     state.currentPage = pageData.page;
     renderPage(elements, pageData, config);
   } catch (error) {
@@ -150,8 +154,7 @@ async function loadWordsPage(wordsApiUrl, page = 0, size = DEFAULT_PAGE_SIZE, se
     searchSubStr: searchWordString,
   });
 
-  if(controller)
-  {
+  if (controller) {
     controller.abort();
   }
   controller = new AbortController();
@@ -280,7 +283,7 @@ async function deleteWord(wordsApiUrl, id) {
 
 const debouncedSearch = debounce(async (query, elements, config, state) => {
   state.searchWordString = query;
-  state.page = 0;
+  state.currentPage = 0;
 
   refreshWords(elements, config, state);
 }, 300)
