@@ -8,7 +8,6 @@ public final class WordSpecs {
   }
 
   public static Specification<WordJpaEntity> learnedEq(Boolean learned) {
-
     return (root, query, cb) -> {
       if (learned == null)
         return cb.conjunction();

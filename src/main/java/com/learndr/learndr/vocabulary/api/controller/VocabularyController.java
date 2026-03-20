@@ -48,8 +48,8 @@ public class VocabularyController {
       @RequestParam int size,
       @RequestParam String sort,
       @RequestParam String searchSubStr,
-    @RequestParam Boolean isLearned) {
-    GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr);
+      @RequestParam(required = false) Boolean isLearned) {
+    GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr, isLearned);
     WordsPageDtoResponse response = WordsPageDtoMapper.toDTO(getWordsPageUseCase.execute(query));
     return ResponseEntity.ok(response);
   }

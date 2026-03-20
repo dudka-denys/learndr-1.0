@@ -1,4 +1,4 @@
-package com.learndr.learndr.vocabulary.application.model.query;
+package com.learndr.learndr.vocabulary.application.model;
 
 public class WordPageRequest  {
   private final int page;

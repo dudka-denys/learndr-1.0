@@ -9,9 +9,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.PageRequest;
 
-import com.learndr.learndr.vocabulary.application.model.query.WordPageRequest;
-import com.learndr.learndr.vocabulary.application.model.query.WordSearchCriteria;
-import com.learndr.learndr.vocabulary.application.model.query.WordsPage;
+import com.learndr.learndr.vocabulary.application.model.WordPageRequest;
+import com.learndr.learndr.vocabulary.application.model.WordSearchCriteria;
+import com.learndr.learndr.vocabulary.application.model.WordsPage;
 import com.learndr.learndr.vocabulary.application.port.out.WordQueryPort;
 import com.learndr.learndr.vocabulary.infrastructure.repository.SpringDataWordRepository;
 import com.learndr.learndr.vocabulary.infrastructure.repository.spec.WordSpecs;
@@ -61,6 +61,6 @@ public class WordQueryRepositoryJpaAdapter implements WordQueryPort {
   }
 
   private Specification<WordJpaEntity> buildSpecification(WordSearchCriteria criteria) {
-    return Specification.where(WordSpecs.textOrTranslationContains(criteria.text()));
+    return Specification.where(WordSpecs.textOrTranslationContains(criteria.text())).and(WordSpecs.learnedEq(criteria.learned()));
   }
 }

@@ -1,4 +1,4 @@
-package com.learndr.learndr.vocabulary.application.model.query;
+package com.learndr.learndr.vocabulary.application.model;
 
 import com.learndr.learndr.vocabulary.application.dto.result.WordOutput;
 import java.util.List;

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.learndr.learndr.vocabulary.application.dto.result.WordOutput;
-import com.learndr.learndr.vocabulary.application.model.query.WordsPage;
+import com.learndr.learndr.vocabulary.application.model.WordsPage;
 import com.learndr.learndr.vocabulary.domain.entity.Word;
 import com.learndr.learndr.vocabulary.domain.entity.WordId;
 import com.learndr.learndr.vocabulary.infrastructure.persistence.entity.WordJpaEntity;
