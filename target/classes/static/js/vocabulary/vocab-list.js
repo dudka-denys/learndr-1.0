@@ -187,13 +187,13 @@ async function createWord(wordsApiUrl, payload) {
 function renderPage(elements, pageData, config) {
   elements.wordsContainer.innerHTML = "";
 
-  if (pageData.wordsDTO.length === 0) {
+  if (pageData.wordsDto.length === 0) {
     elements.pageInfo.textContent = "No words yet";
   } else {
     elements.pageInfo.textContent = `Page ${pageData.page + 1} of ${pageData.totalPages}`;
   }
 
-  pageData.wordsDTO.forEach((word) => {
+  pageData.wordsDto.forEach((word) => {
     elements.wordsContainer.appendChild(createWordCard(word, config));
   });
 

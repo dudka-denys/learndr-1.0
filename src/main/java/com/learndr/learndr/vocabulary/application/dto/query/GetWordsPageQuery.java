@@ -6,7 +6,8 @@ public record GetWordsPageQuery(
     int page,
     int size,
     String sort,
-    String searchSubStr) {
+    String searchSubStr,
+    Boolean isLearned) {
   public GetWordsPageQuery {
     if (page < 0)
       throw new IllegalArgumentException("Page must be >=0");

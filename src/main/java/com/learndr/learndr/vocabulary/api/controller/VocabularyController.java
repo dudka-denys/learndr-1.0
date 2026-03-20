@@ -43,24 +43,25 @@ public class VocabularyController {
   }
 
   @GetMapping("/api/words")
-  public ResponseEntity<WordsPageDTOResponse> getWords(
+  public ResponseEntity<WordsPageDtoResponse> getWords(
       @RequestParam int page,
       @RequestParam int size,
       @RequestParam String sort,
-      @RequestParam String searchSubStr) {
+      @RequestParam String searchSubStr,
+    @RequestParam Boolean isLearned) {
     GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr);
-    WordsPageDTOResponse response = WordsPageDTOMapper.toDTO(getWordsPageUseCase.execute(query));
+    WordsPageDtoResponse response = WordsPageDtoMapper.toDTO(getWordsPageUseCase.execute(query));
     return ResponseEntity.ok(response);
   }
 
   @PostMapping("/api/words")
-  public ResponseEntity<WordResponseDTO> addWord(@Valid @RequestBody CreateWordRequestDTO req) {
+  public ResponseEntity<WordResponseDto> addWord(@Valid @RequestBody CreateWordRequestDto req) {
     AddWordCommand command = new AddWordCommand(
         req.word(),
         req.meaning(),
         req.context());
 
-    WordResponseDTO response = WordApiMapper.toWordResponseDTO(AddWordUseCase.execute(command));
+    WordResponseDto response = WordApiMapper.toWordResponseDTO(AddWordUseCase.execute(command));
 
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }

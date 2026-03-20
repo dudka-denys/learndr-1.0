@@ -1,11 +1,11 @@
 package com.learndr.learndr.vocabulary.api.mapper;
 
-import com.learndr.learndr.vocabulary.api.dto.response.WordResponseDTO;
+import com.learndr.learndr.vocabulary.api.dto.response.WordResponseDto;
 import com.learndr.learndr.vocabulary.application.dto.result.WordOutput;
 
 public class WordApiMapper {
-  public static WordResponseDTO toWordResponseDTO(WordOutput res) {
-    return new WordResponseDTO(
+  public static WordResponseDto toWordResponseDTO(WordOutput res) {
+    return new WordResponseDto(
         res.id(),
         res.word(),
         res.meaning(),

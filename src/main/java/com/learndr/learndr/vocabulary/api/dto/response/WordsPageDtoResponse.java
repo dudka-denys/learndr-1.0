@@ -2,8 +2,8 @@ package com.learndr.learndr.vocabulary.api.dto.response;
 
 import java.util.List;
 
-public record WordsPageDTOResponse(
-  List<WordResponseDTO> wordsDTO,
+public record WordsPageDtoResponse(
+  List<WordResponseDto> wordsDto,
     int page,
     int size,
     long totalElements,
