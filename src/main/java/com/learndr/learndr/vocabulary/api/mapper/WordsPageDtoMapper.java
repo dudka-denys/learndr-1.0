@@ -10,7 +10,7 @@ import com.learndr.learndr.vocabulary.application.dto.result.WordsPageResponse;
 public class WordsPageDtoMapper {
   public static WordsPageDtoResponse toDTO(WordsPageResponse res) {
     List<WordResponseDto> words = res.words().stream()
-        .map(WordsPageDtoMapper::toWordDTO)
+        .map(WordApiMapper::toWordResponseDTO)
         .toList();
     return new WordsPageDtoResponse(
         words,
@@ -25,7 +25,7 @@ public class WordsPageDtoMapper {
 
   public static WordResponseDto toWordDTO(WordOutput word) {
     return new WordResponseDto(
-        word.id(),
+        word.id().value(),
         word.word(),
         word.meaning(),
         word.context(),

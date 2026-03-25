@@ -20,10 +20,7 @@ class LearndrApplicationTests {
   void shouldUpdateWord() throws Exception {
     String json = """
         {
-          "word":"1",
-          "meaning":"1",
-          "context":"1",
-          "isLearned":""
+          "isLearned":"false"
         }
         """;
     mockMvc.perform(patch("/api/words/{id}", 1)
