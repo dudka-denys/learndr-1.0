@@ -70,12 +70,24 @@ public class WordJpaEntity {
     return word;
   }
 
+  public void setWord(String word) {
+    this.word = word;
+  }
+
   public String getMeaning() {
     return meaning;
   }
 
+  public void setMeaning(String meaning) {
+    this.meaning = meaning;
+  }
+
   public String getContext() {
     return context;
+  }
+
+  public void setContext(String context) {
+    this.context = context;
   }
 
   public int getLearnProgressPercentage() {
@@ -88,6 +100,10 @@ public class WordJpaEntity {
 
   public boolean getIsLearned() {
     return Boolean.TRUE.equals(is_learned);
+  }
+
+  public void setIsLearned(boolean isLearned) {
+    this.is_learned = isLearned;
   }
 
   public Instant getCreatedAt() {

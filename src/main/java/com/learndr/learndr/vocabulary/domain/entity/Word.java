@@ -26,6 +26,20 @@ public class Word {
       String word,
       String meaning,
       String context,
+      boolean isLearned) {
+    this.id = id;
+    this.word = word;
+    this.meaning = meaning;
+    this.context = context;
+    this.learnProgressPercentage = isLearned ? 100 : 0;
+    this.isLearned = isLearned;
+  }
+
+  public Word(
+      WordId id,
+      String word,
+      String meaning,
+      String context,
       int learnProgressPercentage,
       boolean isLearned,
       Instant createdAt) {
@@ -36,6 +50,22 @@ public class Word {
     this.learnProgressPercentage = learnProgressPercentage;
     this.isLearned = isLearned;
     this.createdAt = createdAt;
+  }
+
+  public void changeWordValue(String value) {
+    this.word = value;
+  }
+
+  public void changeMeaning(String value) {
+    this.meaning = value;
+  }
+
+  public void changeContext(String value) {
+    this.context = value;
+  }
+
+  public void changeIsLearned(boolean value) {
+    this.isLearned = value;
   }
 
   public WordId getId() {
@@ -58,7 +88,7 @@ public class Word {
     return learnProgressPercentage;
   }
 
-  public boolean isLearned() {
+  public boolean getIsLearned() {
     return isLearned;
   }
 

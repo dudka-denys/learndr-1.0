@@ -7,4 +7,5 @@ public interface WordRepository {
   Word save(Word word);
   boolean existsById(WordId id);
   void deleteById(WordId id);
+  Word findById(WordId id);
 }

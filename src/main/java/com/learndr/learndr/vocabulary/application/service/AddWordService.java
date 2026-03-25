@@ -26,12 +26,12 @@ public class AddWordService implements AddWordUseCase {
     Word saved = wordRepository.save(word);
 
     return new WordOutput(
-        saved.getId().value(),
+        saved.getId(),
         saved.getWord(),
         saved.getMeaning(),
         saved.getContext(),
         saved.getLearnProgressPercentage(),
-        saved.isLearned(),
+        saved.getIsLearned(),
         saved.getCreatedAt());
   }
 }

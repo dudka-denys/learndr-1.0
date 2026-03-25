@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +18,11 @@ import jakarta.validation.constraints.Positive;
 import com.learndr.learndr.vocabulary.application.dto.command.*;
 import com.learndr.learndr.vocabulary.application.dto.query.*;
 import com.learndr.learndr.vocabulary.application.port.in.*;
+import com.learndr.learndr.vocabulary.domain.entity.WordId;
 import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
-import com.learndr.learndr.vocabulary.api.mapper.*;;
+import com.learndr.learndr.vocabulary.api.mapper.*;
+import org.springframework.web.bind.annotation.PutMapping;;
 
 @Controller
 @Validated
@@ -27,14 +30,17 @@ public class VocabularyController {
   private final AddWordUseCase AddWordUseCase;
   private final GetWordsPageUseCase getWordsPageUseCase;
   private final DeleteWordUseCase deleteWordUseCase;
+  private final UpdateWordUseCase updateWordUseCase;
 
   public VocabularyController(
       AddWordUseCase AddWordUseCase,
       GetWordsPageUseCase GetWordsPageUseCase,
-      DeleteWordUseCase DeleteWordUseCase) {
+      DeleteWordUseCase DeleteWordUseCase,
+      UpdateWordUseCase UpdateWordUseCase) {
     this.AddWordUseCase = AddWordUseCase;
     this.getWordsPageUseCase = GetWordsPageUseCase;
     this.deleteWordUseCase = DeleteWordUseCase;
+    this.updateWordUseCase = UpdateWordUseCase;
   }
 
   @GetMapping("/vocabulary")
@@ -70,7 +76,19 @@ public class VocabularyController {
   @DeleteMapping("/api/words/{id}")
   public ResponseEntity deleteWord(@PathVariable @Positive long id) {
     deleteWordUseCase.execute(new DeleteWordCommand(id));
-    return ResponseEntity.noContent().build();
+    return ResponseEntity.status(204).build();
   }
 
+  @PatchMapping("api/words/{id}")
+  public ResponseEntity<WordResponseDto> putMethodName(@PathVariable String id,
+      @RequestBody UpdateWordRequestDto req) {
+    WordResponseDto wordResponseDto = WordApiMapper.toWordResponseDTO(updateWordUseCase.execute(
+        new UpdateWordCommand(
+            new WordId(Integer.parseInt(id)),
+            req.word(),
+            req.meaning(),
+            req.context(),
+            req.isLearned())));
+    return ResponseEntity.ok(wordResponseDto);
+  }
 }

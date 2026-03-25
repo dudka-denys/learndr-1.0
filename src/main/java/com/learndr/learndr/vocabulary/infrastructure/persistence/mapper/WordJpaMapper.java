@@ -26,7 +26,7 @@ public final class WordJpaMapper {
 
   private static WordOutput toWordOutput(WordJpaEntity word) {
     return new WordOutput(
-        word.getId(),
+        new WordId(word.getId()),
         word.getWord(),
         word.getMeaning(),
         word.getContext(),
@@ -49,11 +49,10 @@ public final class WordJpaMapper {
 
   public static WordJpaEntity toJpaEntity(Word word) {
     return new WordJpaEntity(
-      word.getId() == null ? null :  word.getId().value(),
-      word.getWord(),
-            word.getMeaning(),
-            word.getContext(),
-            word.getLearnProgressPercentage()
-    );
+        word.getId() == null ? null : word.getId().value(),
+        word.getWord(),
+        word.getMeaning(),
+        word.getContext(),
+        word.getLearnProgressPercentage());
   }
 }
