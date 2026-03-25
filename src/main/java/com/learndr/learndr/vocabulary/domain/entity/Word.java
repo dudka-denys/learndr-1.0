@@ -66,6 +66,10 @@ public class Word {
 
   public void changeIsLearned(boolean value) {
     this.isLearned = value;
+    if (value)
+      learnProgressPercentage = 100;
+    else
+      learnProgressPercentage = 0;
   }
 
   public WordId getId() {

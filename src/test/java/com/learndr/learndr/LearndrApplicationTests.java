@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -21,10 +20,10 @@ class LearndrApplicationTests {
   void shouldUpdateWord() throws Exception {
     String json = """
         {
-          "word":"444",
-          "meaning":"context",
-          "context":"changed",
-          "isLearned":"false"
+          "word":"1",
+          "meaning":"1",
+          "context":"1",
+          "isLearned":""
         }
         """;
     mockMvc.perform(patch("/api/words/{id}", 1)

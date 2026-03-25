@@ -28,9 +28,9 @@ public class UpdateWordService implements UpdateWordUseCase {
       repositoryWord.changeMeaning(cmd.meaning().get());
     if (cmd.context().isPresent())
       repositoryWord.changeContext(cmd.context().get());
-    if (cmd.isLearned())
+    if (cmd.isLearned() != null){
       repositoryWord.changeIsLearned(cmd.isLearned().booleanValue());
-
+    }
     Word saved = wordRepository.save(repositoryWord);
     return new WordOutput(saved.getId(),
         saved.getWord(),

@@ -34,7 +34,7 @@ public class WordJpaEntity {
   private Integer learn_progress_percentage = 0;
   
   @Column(nullable = false)
-  private Boolean is_learned = false;
+  private boolean is_learned = false;
   
   @Column(updatable = false, insertable = false)
   private Instant created_at;
@@ -99,11 +99,15 @@ public class WordJpaEntity {
   }
 
   public boolean getIsLearned() {
-    return Boolean.TRUE.equals(is_learned);
+    return is_learned;
   }
 
   public void setIsLearned(boolean isLearned) {
     this.is_learned = isLearned;
+    if (isLearned)
+      learn_progress_percentage = 100;
+    else
+      learn_progress_percentage = 0;
   }
 
   public Instant getCreatedAt() {
