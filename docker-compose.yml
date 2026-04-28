@@ -1,18 +1,21 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:16
-    container_name: learndr-postgres
     restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: learndrdb
+
+    env_file:
+      - .env
+
     ports:
       - "55432:5432"
+
     volumes:
       - learndr_pgdata:/var/lib/postgresql/data
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d learndrdb"]
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
       interval: 5s
       timeout: 3s
       retries: 20

@@ -2,3 +2,4 @@ docker-compose/override.yml
 .history/
 decisions/*
 AGENTS.md
+.env
