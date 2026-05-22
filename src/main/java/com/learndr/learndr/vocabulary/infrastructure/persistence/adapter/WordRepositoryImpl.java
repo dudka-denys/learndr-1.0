@@ -28,10 +28,12 @@ public class WordRepositoryImpl implements WordRepository {
     } else {
       WordJpaEntity repositoryWord = jpaWordRepository.findById(word.getId().value())
           .orElseThrow(() -> new EntityNotFoundException("This word doesn't exist"));
-      repositoryWord.setWord(word.getWord());
+      System.out.println(word.getWord());
+          repositoryWord.setWord(word.getWord());
       repositoryWord.setMeaning(word.getMeaning());
       repositoryWord.setContext(word.getContext());
       repositoryWord.setIsLearned(word.getIsLearned());
+      jpaWordRepository.save(repositoryWord);
       return WordJpaMapper.toDomain(repositoryWord);
     }
 

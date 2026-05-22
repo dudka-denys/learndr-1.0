@@ -21,14 +21,14 @@ public class UpdateWordService implements UpdateWordUseCase {
   @Override
   public WordOutput execute(UpdateWordCommand cmd) {
     Word repositoryWord = wordRepository.findById(cmd.id());
-
-    if (cmd.word().isPresent())
-      repositoryWord.changeWordValue(cmd.word().get());
-    if (cmd.meaning().isPresent())
-      repositoryWord.changeMeaning(cmd.meaning().get());
-    if (cmd.context().isPresent())
-      repositoryWord.changeContext(cmd.context().get());
-    if (cmd.isLearned() != null){
+    System.out.println(cmd.word());
+    if (cmd.word() != null)
+      repositoryWord.changeWordValue(cmd.word());
+    if (cmd.meaning() != null)
+      repositoryWord.changeMeaning(cmd.meaning());
+    if (cmd.context() != null)
+      repositoryWord.changeContext(cmd.context());
+    if (cmd.isLearned() != null) {
       repositoryWord.changeIsLearned(cmd.isLearned().booleanValue());
     }
     Word saved = wordRepository.save(repositoryWord);

@@ -6,9 +6,9 @@ import com.learndr.learndr.vocabulary.domain.entity.WordId;
 
 public record UpdateWordCommand(
     WordId id,
-    JsonNullable<String> word,
-    JsonNullable<String> meaning,
-    JsonNullable<String> context,
+    String word,
+    String meaning,
+    String context,
     Boolean isLearned) {
 
 }

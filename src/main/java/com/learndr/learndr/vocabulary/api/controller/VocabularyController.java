@@ -22,7 +22,6 @@ import com.learndr.learndr.vocabulary.domain.entity.WordId;
 import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
 import com.learndr.learndr.vocabulary.api.mapper.*;
-import org.springframework.web.bind.annotation.PutMapping;;
 
 @Controller
 @Validated
@@ -74,21 +73,22 @@ public class VocabularyController {
 
   // return 204
   @DeleteMapping("/api/words/{id}")
-  public ResponseEntity deleteWord(@PathVariable @Positive long id) {
+  public ResponseEntity<Integer> deleteWord(@PathVariable @Positive long id) {
     deleteWordUseCase.execute(new DeleteWordCommand(id));
     return ResponseEntity.status(204).build();
   }
 
   @PatchMapping("api/words/{id}")
-  public ResponseEntity<WordResponseDto> putMethodName(@PathVariable String id,
+  public ResponseEntity<WordResponseDto> updateWord(@PathVariable String id,
       @RequestBody UpdateWordRequestDto req) {
-    WordResponseDto wordResponseDto = WordApiMapper.toWordResponseDTO(updateWordUseCase.execute(
-        new UpdateWordCommand(
-            new WordId(Integer.parseInt(id)),
-            req.word(),
-            req.meaning(),
-            req.context(),
-            req.isLearned())));
+    UpdateWordCommand cmd = new UpdateWordCommand(
+        new WordId(Integer.parseInt(id)),
+        req.word(),
+        req.meaning(),
+        req.context(),
+        req.isLearned());
+
+    WordResponseDto wordResponseDto = WordApiMapper.toWordResponseDTO(updateWordUseCase.execute(cmd));
     return ResponseEntity.ok(wordResponseDto);
   }
 }
