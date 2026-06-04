@@ -8,7 +8,7 @@ import org.hibernate.annotations.DynamicInsert;
 
 @DynamicInsert
 @Entity
-@Table(name = "words", schema = "schema_vocabulary")
+@Table(name = "words")
 public class WordJpaEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,6 @@ package com.learndr.learndr.vocabulary.api.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -23,7 +23,7 @@ import com.learndr.learndr.vocabulary.api.dto.request.*;
 import com.learndr.learndr.vocabulary.api.dto.response.*;
 import com.learndr.learndr.vocabulary.api.mapper.*;
 
-@Controller
+@RestController
 @Validated
 public class VocabularyController {
   private final AddWordUseCase AddWordUseCase;
@@ -42,17 +42,12 @@ public class VocabularyController {
     this.updateWordUseCase = UpdateWordUseCase;
   }
 
-  @GetMapping("/vocabulary")
-  public String vocabulary() {
-    return "vocabulary/vocab-list";
-  }
-
   @GetMapping("/api/words")
   public ResponseEntity<WordsPageDtoResponse> getWords(
       @RequestParam int page,
       @RequestParam int size,
       @RequestParam String sort,
-      @RequestParam String searchSubStr,
+      @RequestParam (required = false) String searchSubStr,
       @RequestParam(required = false) Boolean isLearned) {
     GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr, isLearned);
     WordsPageDtoResponse response = WordsPageDtoMapper.toDTO(getWordsPageUseCase.execute(query));
@@ -60,7 +55,7 @@ public class VocabularyController {
   }
 
   @PostMapping("/api/words")
-  public ResponseEntity<WordResponseDto> addWord(@Valid @RequestBody CreateWordRequestDto req) {
+  public ResponseEntity<WordResponseDto> createWord(@Valid @RequestBody CreateWordRequestDto req) {
     AddWordCommand command = new AddWordCommand(
         req.word(),
         req.meaning(),

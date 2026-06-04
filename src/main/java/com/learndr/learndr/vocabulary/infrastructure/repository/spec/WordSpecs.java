@@ -17,10 +17,10 @@ public final class WordSpecs {
 
   public static Specification<WordJpaEntity> textOrTranslationContains(String q) {
 
-    String like = "%" + q.trim().toLowerCase() + "%";
     return (root, query, cb) -> {
       if (q == null || q.isBlank())
         return cb.conjunction();
+      String like = "%" + q.trim().toLowerCase() + "%";
       return cb.or(
           cb.like(cb.lower(root.get("word")), like),
           cb.like(cb.lower(root.get("meaning")), like));
