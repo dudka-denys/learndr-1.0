@@ -3,6 +3,7 @@ spring:
     name: learndr
   datasource:
     url: jdbc:postgresql://localhost:55432/learndrdb
+    # TODO: Replace with actual database credentials
     username: postgres
     password: postgres
 

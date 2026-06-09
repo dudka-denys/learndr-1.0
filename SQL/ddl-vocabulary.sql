@@ -1,6 +1,8 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 CREATE EXTENSION IF NOT EXISTS citext;
--- schema
-DROP TABLE IF EXISTS words, roles, users;
+
 
 -- roles
 CREATE TABLE IF NOT EXISTS roles (
@@ -12,13 +14,13 @@ CREATE TABLE IF NOT EXISTS roles (
 -- users
 CREATE TABLE IF NOT EXISTS users (
     id_user            integer GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1) PRIMARY KEY,
-    display_name       text NOT NULL,
+    user_name       text NOT NULL,
     email              citext NOT NULL,
     preferred_locale   char(2) NOT NULL,
-    fk_role_id            integer NOT NULL,
-    password_hash      text,
-    EmailVerifiedAt    timestamptz,
+    password_hash      text NOT NULL,
+    email_verified_at    timestamptz,
     last_login_at      timestamptz,
+    fk_role_id            integer NOT NULL,
 
     CONSTRAINT ux_users_email UNIQUE (email),
 

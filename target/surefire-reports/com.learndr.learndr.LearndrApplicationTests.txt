@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.learndr.learndr.LearndrApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.626 s <<< FAILURE! -- in com.learndr.learndr.LearndrApplicationTests
-com.learndr.learndr.LearndrApplicationTests.shouldUpdateWord -- Time elapsed: 0.628 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.428 s <<< FAILURE! -- in com.learndr.learndr.LearndrApplicationTests
+com.learndr.learndr.LearndrApplicationTests.shouldUpdateWord -- Time elapsed: 0.719 s <<< ERROR!
 jakarta.servlet.ServletException: Request processing failed: org.springframework.orm.jpa.JpaObjectRetrievalFailureException: This word doesn't exist
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1008)
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:877)

@@ -21,7 +21,6 @@ public class UpdateWordService implements UpdateWordUseCase {
   @Override
   public WordOutput execute(UpdateWordCommand cmd) {
     Word repositoryWord = wordRepository.findById(cmd.id());
-    System.out.println(cmd.word());
     if (cmd.word() != null)
       repositoryWord.changeWordValue(cmd.word());
     if (cmd.meaning() != null)

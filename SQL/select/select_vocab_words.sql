@@ -12,6 +12,14 @@
 --     RETURNING id_word
 -- )
 -- ===================== UPDATE WORDS  =====================
+-- id_user            integer GENERATED ALWAYS AS ID
+-- user_name       text NOT NULL,
+-- email              citext NOT NULL,
+-- preferred_locale   char(2) NOT NULL,
+-- fk_role_id            integer NOT NULL,
+-- password_hash      text NOT NULL,
+-- EmailVerifiedAt    timestamptz,
+-- last_login_at      timestamptz,
 -- ===================== INSERT WORDS  =====================
 INSERT INTO roles (
   code,
@@ -20,12 +28,13 @@ INSERT INTO roles (
   1, 'admin'
 );
 INSERT INTO users (
-  display_name,
+  user_name,
   email,
   preferred_locale,
-  fk_role_id
+  fk_role_id,
+  password_hash
 ) VALUES (
-  'dendrr', 'dudka.denis228@yahoo.com', 'ru', 1
+  'dendrr', 'dudka.denis228@yahoo.com', 'ru', 1, 'asd'
 );
 INSERT INTO words (
   word,

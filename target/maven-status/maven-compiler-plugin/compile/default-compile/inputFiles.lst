@@ -1,4 +1,5 @@
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/LearndrApplication.java
+/home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/persistance/entity/UserJpaEntity.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/vocabulary/api/controller/VocabularyController.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/vocabulary/api/dto/request/CreateWordRequestDto.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/vocabulary/api/dto/request/UpdateWordRequestDto.java

@@ -2,6 +2,7 @@ package com.learndr.learndr.vocabulary.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 
+
 import java.time.Instant;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -20,27 +21,31 @@ public class WordJpaEntity {
 
   @Column(nullable = false)
   private String meaning;
-  
+
   @Column
   private String context;
-  
+
   @Column
   private Instant next_review_at;
-  
+
   @Column
   private Integer repetition_count;
-  
+
   @Column(nullable = false)
   private Integer learn_progress_percentage = 0;
-  
+
   @Column(nullable = false)
   private boolean is_learned = false;
-  
+
   @Column(updatable = false, insertable = false)
   private Instant created_at;
-  
+
   @Column(nullable = false)
   private Integer review_lapse_count;
+
+  @Column(nullable = false)
+  // TODO: remove stub (= 1)
+  private Long fk_user_id = 1L;
 
   protected WordJpaEntity() {
   }
