@@ -14,38 +14,38 @@ public class WordJpaEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_word")
-  private Long id_word;
+  private Long idWord;
 
-  @Column(nullable = false)
+  @Column(name = "word", nullable = false)
   private String word;
 
-  @Column(nullable = false)
+  @Column(name = "meaning", nullable = false)
   private String meaning;
 
-  @Column
+  @Column(name = "context")
   private String context;
 
-  @Column
-  private Instant next_review_at;
+  @Column(name = "next_review_at")
+  private Instant nextReviewAt;
 
-  @Column
-  private Integer repetition_count;
+  @Column(name = "repetition_count")
+  private Integer repetitionCount;
 
-  @Column(nullable = false)
-  private Integer learn_progress_percentage = 0;
+  @Column(name = "learn_progress_percentage", nullable = false)
+  private Integer learnProgressPercentage = 0;
 
-  @Column(nullable = false)
-  private boolean is_learned = false;
+  @Column(name = "is_learned", nullable = false)
+  private boolean isLearned = false;
 
-  @Column(updatable = false, insertable = false)
-  private Instant created_at;
+  @Column(name = "created_at", updatable = false, insertable = false)
+  private Instant createdAt;
 
-  @Column(nullable = false)
-  private Integer review_lapse_count;
+  @Column(name = "review_lapse_count", nullable = false)
+  private Integer reviewLapseCount;
 
-  @Column(nullable = false)
+  @Column(name = "fk_user_id", nullable = false)
   // TODO: remove stub (= 1)
-  private Long fk_user_id = 1L;
+  private Long fkUserId = 1L;
 
   protected WordJpaEntity() {
   }
@@ -56,19 +56,19 @@ public class WordJpaEntity {
     this.context = context;
   }
 
-  public WordJpaEntity(Long id_word, String word, String meaning, String context) {
-    this.id_word = id_word;
+  public WordJpaEntity(Long idWord, String word, String meaning, String context) {
+    this.idWord = idWord;
     this.word = word;
     this.meaning = meaning;
     this.context = context;
   }
 
-  public WordJpaEntity(Long id_word, String word, String meaning, String context, int learn_progress_percentage) {
-    this.id_word = id_word;
+  public WordJpaEntity(Long idWord, String word, String meaning, String context, int learnProgressPercentage) {
+    this.idWord = idWord;
     this.word = word;
     this.meaning = meaning;
     this.context = context;
-    this.learn_progress_percentage = learn_progress_percentage;
+    this.learnProgressPercentage = learnProgressPercentage;
   }
 
   public String getWord() {
@@ -96,26 +96,26 @@ public class WordJpaEntity {
   }
 
   public int getLearnProgressPercentage() {
-    return learn_progress_percentage != null ? learn_progress_percentage : 0;
+    return learnProgressPercentage != null ? learnProgressPercentage : 0;
   }
 
   public Long getId() {
-    return id_word;
+    return idWord;
   }
 
   public boolean getIsLearned() {
-    return is_learned;
+    return isLearned;
   }
 
   public void setIsLearned(boolean isLearned) {
-    this.is_learned = isLearned;
+    this.isLearned = isLearned;
     if (isLearned)
-      learn_progress_percentage = 100;
+      learnProgressPercentage = 100;
     else
-      learn_progress_percentage = 0;
+      learnProgressPercentage = 0;
   }
 
   public Instant getCreatedAt() {
-    return created_at;
+    return createdAt;
   }
 }

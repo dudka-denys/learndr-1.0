@@ -11,7 +11,7 @@ public final class WordSpecs {
     return (root, query, cb) -> {
       if (learned == null)
         return cb.conjunction();
-      return cb.equal(root.get("is_learned"), learned);
+      return cb.equal(root.get("isLearned"), learned);
     };
   }
 

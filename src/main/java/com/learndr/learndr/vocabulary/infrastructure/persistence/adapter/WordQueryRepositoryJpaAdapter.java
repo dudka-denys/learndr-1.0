@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +20,10 @@ import com.learndr.learndr.vocabulary.infrastructure.persistence.mapper.WordJpaM
 
 @Repository
 public class WordQueryRepositoryJpaAdapter implements WordQueryPort {
-  private static final String DEFAULT_SORT_FIELD = "created_at";
+  private static final String DEFAULT_SORT_FIELD = "createdAt";
   private static final Map<String, String> SORT_FIELD_ALIASES = Map.ofEntries(
-      Map.entry("createdAt", "created_at"),
-      Map.entry("created_at", "created_at"));
+      Map.entry("createdAt", "createdAt"),
+      Map.entry("created_at", "createdAt"));
 
   private final SpringDataWordRepository jpa;
 
@@ -46,7 +45,7 @@ public class WordQueryRepositoryJpaAdapter implements WordQueryPort {
 
   private Sort parseSort(String sort) {
     if (sort == null || sort.isBlank()) {
-      return JpaSort.unsafe(Sort.Direction.DESC, DEFAULT_SORT_FIELD);
+      return Sort.by(Sort.Direction.DESC, DEFAULT_SORT_FIELD);
     }
 
     String[] parts = sort.split(",");
@@ -57,7 +56,7 @@ public class WordQueryRepositoryJpaAdapter implements WordQueryPort {
         ? Sort.Direction.ASC
         : Sort.Direction.DESC;
 
-    return JpaSort.unsafe(dir, field);
+    return Sort.by(dir, field);
   }
 
   private Specification<WordJpaEntity> buildSpecification(WordSearchCriteria criteria) {

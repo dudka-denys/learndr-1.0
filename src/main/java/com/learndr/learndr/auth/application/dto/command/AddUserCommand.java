@@ -1,9 +1,11 @@
 package com.learndr.learndr.auth.application.dto.command;
 
+import com.learndr.learndr.auth.domain.entity.Locale;
+
 public record AddUserCommand(
-    String user_name,
+    String userName,
     String email,
-    String preferred_locale,
+    Locale preferredLocale,
     String password) {
 
 }
