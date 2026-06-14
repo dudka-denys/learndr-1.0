@@ -21,13 +21,13 @@
 -- EmailVerifiedAt    timestamptz,
 -- last_login_at      timestamptz,
 -- ===================== INSERT WORDS  =====================
-INSERT INTO roles (
+INSERT INTO public.roles (
   code,
   name
 ) VALUES (
   1, 'admin'
 );
-INSERT INTO users (
+INSERT INTO public.users (
   user_name,
   email,
   preferred_locale,
@@ -36,7 +36,7 @@ INSERT INTO users (
 ) VALUES (
   'dendrr', 'dudka.denis228@yahoo.com', 'ru', 1, 'asd'
 );
-INSERT INTO words (
+INSERT INTO public.words (
   word,
   meaning,
   context,
@@ -126,7 +126,7 @@ SELECT id_word,
       --  is_learned,
        created_at,
        review_lapse_count
-FROM words
+FROM public.words
 ORDER BY id_word
 LIMIT 1000;
 -- ===================== SELECT WORDS  =====================

@@ -47,7 +47,7 @@ public class VocabularyController {
       @RequestParam int page,
       @RequestParam int size,
       @RequestParam String sort,
-      @RequestParam (required = false) String searchSubStr,
+      @RequestParam(required = false) String searchSubStr,
       @RequestParam(required = false) Boolean isLearned) {
     GetWordsPageQuery query = new GetWordsPageQuery(page, size, sort, searchSubStr, isLearned);
     WordsPageDtoResponse response = WordsPageDtoMapper.toDTO(getWordsPageUseCase.execute(query));
@@ -66,7 +66,6 @@ public class VocabularyController {
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
-  // return 204
   @DeleteMapping("/api/words/{id}")
   public ResponseEntity<Integer> deleteWord(@PathVariable @Positive long id) {
     deleteWordUseCase.execute(new DeleteWordCommand(id));

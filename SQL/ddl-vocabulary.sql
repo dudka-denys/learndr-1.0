@@ -1,6 +1,6 @@
-DROP SCHEMA public CASCADE;
+DROP SCHEMA if EXISTS public CASCADE;
 CREATE SCHEMA public;
-
+SET search_path TO public;
 CREATE EXTENSION IF NOT EXISTS citext;
 
 
