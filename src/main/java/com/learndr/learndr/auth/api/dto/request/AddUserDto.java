@@ -1,9 +1,10 @@
 package com.learndr.learndr.auth.api.dto.request;
 
-public record UserDto(
+public record AddUserDto(
     String userName,
     String email,
     String preferredLocale,
-    String password) {
+    String password,
+    long roleId) {
 
 }

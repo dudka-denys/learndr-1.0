@@ -3,21 +3,21 @@ package com.learndr.learndr.auth.domain.entity;
 public class User {
   public UserId id;
   public String userName;
-  public String mail;
+  public String email;
   public String passwordHash;
   public Locale preferredLocale;
-  public int fkRoleId;
+  public RoleId roleId;
 
   public User(
       String userName,
-      String mail,
+      String email,
       String passwordHash,
       Locale preferredLocale,
-      int fkRoleId) {
+      RoleId roleId) {
     this.userName = userName;
-    this.mail = mail;
+    this.email = email;
     this.passwordHash = passwordHash;
     this.preferredLocale = preferredLocale;
-    this.fkRoleId = fkRoleId;
+    this.roleId = roleId;
   }
 }

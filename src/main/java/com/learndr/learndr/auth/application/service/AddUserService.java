@@ -21,6 +21,7 @@ public class AddUserService implements AddUserUseCase {
   public void execute(AddUserCommand cmd) {
     PasswordEncoder encoder = new BCryptPasswordEncoder();
     String passwordHash = encoder.encode(cmd.password());
-    User userWithHash = new User(cmd.userName(), cmd.email(), passwordHash, cmd.preferredLocale(), cmd.fkRoleId());
+    User userWithHash = new User(cmd.userName(), cmd.email(), passwordHash, cmd.preferredLocale(), cmd.roleId());
+    userRepository.save(userWithHash);
   }
 }

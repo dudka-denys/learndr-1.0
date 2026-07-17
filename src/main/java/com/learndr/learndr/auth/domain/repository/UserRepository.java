@@ -4,4 +4,5 @@ import com.learndr.learndr.auth.domain.entity.User;
 
 public interface UserRepository {
   public void save(User user);
+  public boolean existsByEmail(String email);
 }
