@@ -1,6 +1,5 @@
 package com.learndr.learndr.auth.infrastructure.persistance.adapter;
 
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import com.learndr.learndr.auth.domain.entity.User;
@@ -26,7 +25,7 @@ public class UserRepositoryImplementation implements UserRepository {
 
   @Override
   public boolean existsByEmail(String email) {
-    if (jpa.findAll(UserSpecs.emailContains(email)).isEmpty())
+    if (jpa.exists(UserSpecs.emailContains(email)))
       return false;
     return true;
   }
