@@ -1,6 +1,8 @@
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/LearndrApplication.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/api/controller/AuthController.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/api/dto/request/AddUserDto.java
+/home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/api/exceptions/GlobalHandlerException.java
+/home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/api/exceptions/dto/ApiError.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/api/mapper/AddUserRequestMapper.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/application/dto/command/AddUserCommand.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/application/exception/EmailAlreadyExistException.java
@@ -10,8 +12,6 @@
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/domain/entity/User.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/domain/entity/UserId.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/domain/repository/UserRepository.java
-/home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/exceptions/GlobalHandlerException.java
-/home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/exceptions/dto/ApiError.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/persistance/adapter/UserRepositoryImplementation.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/persistance/entity/UserJpaEntity.java
 /home/dendrr/Programming/learndr/learndr-1.0/src/main/java/com/learndr/learndr/auth/infrastructure/persistance/mapper/UserJpaMapper.java

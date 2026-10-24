@@ -1,1 +1,2 @@
-/home/dendrr/Programming/learndr/learndr-1.0/src/test/java/com/learndr/learndr/LearndrApplicationTests.java
+/home/dendrr/Programming/learndr/learndr-1.0/src/test/java/com/learndr/learndr/auth/application/service/AddNewUserTest.java
+/home/dendrr/Programming/learndr/learndr-1.0/src/test/java/com/learndr/learndr/vocabulary/application/service/VerifyUpdatingWord.java

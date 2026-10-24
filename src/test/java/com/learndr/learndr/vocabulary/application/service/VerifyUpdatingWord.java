@@ -1,4 +1,4 @@
-package com.learndr.learndr;
+package com.learndr.learndr.vocabulary.application.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LearndrApplicationTests {
+class VerifyUpdatingWord {
   @Autowired
   private MockMvc mockMvc;
 
@@ -20,13 +20,12 @@ class LearndrApplicationTests {
   void shouldUpdateWord() throws Exception {
     String json = """
         {
-          "isLearned":"false"
+          "isLearned":false
         }
         """;
     mockMvc.perform(patch("/api/words/{id}", 1)
         .contentType(MediaType.APPLICATION_JSON)
-      .content(json))
-      .andExpect(status().isOk());
+        .content(json))
+        .andExpect(status().isOk());
   }
 }
-// /api/words/1?word=444&meaning=context&context=&isLearned=false
